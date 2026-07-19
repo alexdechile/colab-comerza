@@ -2,6 +2,13 @@
 
 ## Último Realizado
 
+- [x] Fuentes Montserrat incluidas en el repo (TTF estáticos, ~1.5MB total)
+  - Causa: `google/fonts/main/ofl/montserrat` ya solo tiene fuentes variables
+    (`Montserrat[wght].ttf`); los TTF estáticos daban 404 → wget guardaba una
+    página HTML de error y FreeType fallaba al cargarla en `comp.render()`.
+  - Solución: TTF estáticos descargados del repo oficial `JulietaUla/Montserrat` y
+    commiteados directamente al repo (sin dependencia de red en runtime).
+  - Validación reforzada: magic bytes (00 01 00 00 / true / ttcf / OTTO) + tamaño.
 - [x] v3.0: Migración completa a PyMotion (pymotion-studio v3.7.0)
   - Textos con FreeType+HarfBuzz (PyMotion TextClip) — textos nítidos sin boost
   - Ken Burns con PIL + ffmpeg (zoom/pan suave ease-in-out)
@@ -29,6 +36,6 @@ Convierte un JSON de diseño gráfico (canva-lite) en un video animado 9:16 con:
 - **PIL (Pillow)** — Generación de frames Ken Burns (zoom/pan con remuestreo LANCZOS)
 - **gTTS** — Locución español neutro (tld="com.mx")
 - **FFmpeg** — Ensamblado de frames, combinación video+audio final
-- **Montserrat** — Tipografía (ExtraBold, Bold, Regular desde Google Fonts)
+- **Montserrat** — Tipografía estática en repo (ExtraBold, Bold, Regular | SIL OFL)
 - **Python 3.12+** requerido por PyMotion
 - **Formato**: 540×960 (9:16 vertical), 24fps, H.264/AAC
